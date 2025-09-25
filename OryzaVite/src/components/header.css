@@ -1,3 +1,12 @@
+/* evita sublinhado no logo/brand */
+.header .brand,
+.header .brand:hover,
+.header .brand:focus,
+.header .brand:visited {
+  text-decoration: none !important;
+  color: inherit; /* mantém a cor do header */
+}
+
 .header {
   position: fixed;
   top: 0;
@@ -19,6 +28,15 @@
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
 }
 
 .logo {

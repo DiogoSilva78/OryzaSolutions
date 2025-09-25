@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";   // <— novo
 import "./header.css";
 import logo from "../assets/logo.png";
 
@@ -7,8 +8,10 @@ const Header = () => {
     <header className="header">
       {/* Esquerda */}
       <div className="header-left">
-        <img src={logo} alt="Logo" className="logo" />
-        <span className="title">Gaia Pet</span>
+        <Link to="/" className="brand" aria-label="Ir para a Home">
+          <img src={logo} alt="Logo" className="logo" />
+          <span className="title">Gaia Pet</span>
+        </Link>
       </div>
 
       {/* Direita */}
