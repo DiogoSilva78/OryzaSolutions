@@ -1,0 +1,39 @@
+{
+  "version": "0.2.0",
+  "compounds": [
+    {
+      "name": "Run DB + Backend + Frontend + Mobile",
+      "configurations": ["Backend Dev", "Frontend Dev", "Mobile (Expo)"],
+      "preLaunchTask": "db:up"
+    }
+  ],
+  "configurations": [
+    {
+      "name": "Backend Dev",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/backend",
+      "runtimeExecutable": "/opt/homebrew/bin/npm",
+      "runtimeArgs": ["run", "start:dev"],
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Frontend Dev",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/frontend",
+      "runtimeExecutable": "/opt/homebrew/bin/npm",
+      "runtimeArgs": ["run", "dev"],
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Mobile (Expo)",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/mobile",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "start"],
+      "console": "integratedTerminal"
+    }
+  ]
+}
