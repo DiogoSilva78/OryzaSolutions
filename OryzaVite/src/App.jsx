@@ -1,43 +1,26 @@
-// src/App.jsx
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
-
-// IMPORTS — respeitar minúsculas (como no teu screenshot)
-import Header from "./components/header.jsx";
-import Sidebar from "./components/sidebar.jsx";
+import { useState } from 'react';
+import reactLogo from './assets/react.svg';
+import logo from "C:/Users/Leandro/Desktop/Cobra IT/OryzaSolutions/OryzaVite/src/assets/logo.png";
+import goldenpiscina from "C:/Users/Leandro/Desktop/Cobra IT/OryzaSolutions/OryzaVite/src/assets/goldenpiscina.png";
+import viteLogo from '/vite.svg';
+import './App.css'; // Ou o caminho do seu CSS
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
     <>
-      <Header />
-      <Sidebar />
-
-      {/* Compensar header (60px) e sidebar (260px) */}
-      <main style={{ paddingTop: "60px", paddingLeft: "260px" }}>
-        <div>
-          <a href="https://vite.dev" target="_blank" rel="noreferrer">
-            <img src={viteLogo} className="logo" alt="Vite logo" />
-          </a>
-          <a href="https://react.dev" target="_blank" rel="noreferrer">
-            <img src={reactLogo} className="logo react" alt="React logo" />
-          </a>
+      <div className="bemvindo">
+        <img src={logo} alt="Logo" className="logo" />
+        <div className="input-group">
+          <input type="text" name="nome" placeholder="Email" />
         </div>
-
-        <h1>Vite + React</h1>
-        <div className="card">
-          <button onClick={() => setCount((c) => c + 1)}>count is {count}</button>
-          <p>
-            Edita <code>src/App.jsx</code> e guarda para testar o HMR
-          </p>
+        <div className="input-group">
+          <input type="text" name="nome" placeholder="Senha" />
         </div>
-        <p className="read-the-docs">
-          Clica nos logos do Vite e do React para saber mais
-        </p>
-      </main>
+        <button className="login-button">Login</button> {/* Botão adicionado */}
+      </div>
+      <img src={goldenpiscina} alt="golden" className="golden" />
     </>
   );
 }
