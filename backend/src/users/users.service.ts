@@ -1,7 +1,7 @@
 import { Injectable, ConflictException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { Role } from '@prisma/client';
 import * as argon2 from 'argon2';
+import { Role } from '@prisma/client';
 
 @Injectable()
 export class UsersService {
@@ -26,6 +26,14 @@ export class UsersService {
     return this.prisma.user.create({
       data: { email: data.email, name: data.name, passwordHash, role: data.role ?? 'VET' },
       select: { id: true, email: true, name: true, role: true, createdAt: true },
+    });
+  }
+
+  // 👇 MÉTODO QUE FALTAVA
+  list() {
+    return this.prisma.user.findMany({
+      orderBy: { createdAt: 'desc' },
+      select: { id: true, email: true, name: true, role: true, isActive: true, createdAt: true },
     });
   }
 }

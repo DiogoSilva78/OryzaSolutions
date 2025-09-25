@@ -1,0 +1,12 @@
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjbWZ6YmNlN20wMDAwdjU1YnhzODN4Zm14IiwiZW1haWwiOiJhZG1pbkBvcnl6YS5sb2NhbCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc1ODgxMjEyNCwiZXhwIjoxNzU4ODEzMDI0fQ.frdK4PJ5dC1X1bsCXYCx4u2HDmHDsmBLbIx8zKKkSCs
+
+
+
+curl -s -X POST http://localhost:3000/owners \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjbWZ6YmNlN20wMDAwdjU1YnhzODN4Zm14IiwiZW1haWwiOiJhZG1pbkBvcnl6YS5sb2NhbCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc1ODgxMjEyNCwiZXhwIjoxNzU4ODEzMDI0fQ.frdK4PJ5dC1X1bsCXYCx4u2HDmHDsmBLbIx8zKKkSCs" -H "Content-Type: application/json" \
+  -d '{"name":"João Silva","email":"joao@example.com","phone":"+351912345678"}'
+
+
+  curl -s -X POST http://localhost:3000/patients \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjbWZ6YmNlN20wMDAwdjU1YnhzODN4Zm14IiwiZW1haWwiOiJhZG1pbkBvcnl6YS5sb2NhbCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc1ODgxMjEyNCwiZXhwIjoxNzU4ODEzMDI0fQ.frdK4PJ5dC1X1bsCXYCx4u2HDmHDsmBLbIx8zKKkSCs" -H "Content-Type: application/json" \
+  -d '{"ownerId":"<OWNER_ID>","name":"Bobby","species":"Cão","sex":"M","castrated":false,"birthDate":"2022-03-01"}'

@@ -26,3 +26,50 @@ model User {
   updatedAt    DateTime @updatedAt
 }
 
+enum SurgeryEventType {
+  PERFORMED // realizado
+  SUGGESTED // sugerido
+}
+
+model Owner {
+  id        String    @id @default(cuid())
+  name      String
+  email     String?   @unique
+  phone     String?
+  patients  Patient[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Patient {
+  id        String         @id @default(cuid())
+  ownerId   String
+  name      String
+  species   String         @db.VarChar(60) // cão, gato, etc.
+  breed     String?        @db.VarChar(60)
+  sex       String         @db.Char(1) // 'M' | 'F'
+  castrated Boolean        @default(false)
+  birthDate DateTime?
+  events    SurgeryEvent[]
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+
+  owner Owner @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+
+  @@unique([ownerId, name]) // evita duplicados com o mesmo dono
+  @@index([ownerId])
+}
+
+model SurgeryEvent {
+  id        String           @id @default(cuid())
+  patientId String
+  type      SurgeryEventType
+  procedure String // "Castração", "Ovariohisterectomia", ...
+  eventDate DateTime // data do procedimento/sugestão
+  notes     String?
+  createdAt DateTime         @default(now())
+
+  patient Patient @relation(fields: [patientId], references: [id], onDelete: Cascade)
+
+  @@index([patientId, eventDate])
+}
