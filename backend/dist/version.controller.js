@@ -9,34 +9,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.HealthController = void 0;
+exports.VersionController = void 0;
 const common_1 = require("@nestjs/common");
-const prisma_service_1 = require("../prisma/prisma.service");
-let HealthController = class HealthController {
-    constructor(prisma) {
-        this.prisma = prisma;
-    }
-    root() { return { status: 'ok' }; }
-    async db() {
-        await this.prisma.$queryRaw `SELECT 1`;
-        return { db: 'ok' };
+let VersionController = class VersionController {
+    get() {
+        var _a, _b, _c;
+        return {
+            name: (_a = process.env.APP_NAME) !== null && _a !== void 0 ? _a : 'oryza-backend',
+            version: (_b = process.env.APP_VERSION) !== null && _b !== void 0 ? _b : '0.1.0',
+            node: process.version,
+            env: (_c = process.env.NODE_ENV) !== null && _c !== void 0 ? _c : 'development',
+            time: new Date().toISOString(),
+        };
     }
 };
-exports.HealthController = HealthController;
+exports.VersionController = VersionController;
 __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
-], HealthController.prototype, "root", null);
-__decorate([
-    (0, common_1.Get)('db'),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Promise)
-], HealthController.prototype, "db", null);
-exports.HealthController = HealthController = __decorate([
-    (0, common_1.Controller)('health'),
-    __metadata("design:paramtypes", [prisma_service_1.PrismaService])
-], HealthController);
-//# sourceMappingURL=health.controller.js.map
+], VersionController.prototype, "get", null);
+exports.VersionController = VersionController = __decorate([
+    (0, common_1.Controller)('version')
+], VersionController);
+//# sourceMappingURL=version.controller.js.map
