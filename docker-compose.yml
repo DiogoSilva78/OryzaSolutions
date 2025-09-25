@@ -1,0 +1,21 @@
+services:
+  db:
+    image: docker.io/library/postgres:16-alpine
+    container_name: oryza-db
+    environment:
+      POSTGRES_USER: oryza
+      POSTGRES_PASSWORD: oryza
+      POSTGRES_DB: oryza
+    ports:
+      - "5432:5432"
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U oryza -d oryza"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+
+volumes:
+  dbdata:
