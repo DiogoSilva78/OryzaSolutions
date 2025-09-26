@@ -11,7 +11,8 @@ const DADOS_INICIAIS = [
 ];
 
 function Badge({ tone = "azul", children }) {
-  return <span className={`badge badge-${tone}`}>{children}</span>;
+  // evita usar template string para não dar erro de escape
+  return <span className={"badge badge-" + tone}>{children}</span>;
 }
 
 function Estado({ value }) {
@@ -23,7 +24,7 @@ function StatCard({ titulo, valor, destaque }) {
   return (
     <div className="stat-card">
       <p className="stat-title">{titulo}</p>
-      <p className={`stat-value ${destaque ? "stat-accent" : ""}`}>{valor}</p>
+      <p className={"stat-value " + (destaque ? "stat-accent" : "")}>{valor}</p>
     </div>
   );
 }
@@ -51,8 +52,6 @@ export default function GestaoUtilizadores() {
   return (
     <div className="page">
       <Header />
-
-      {/* Compensa a altura do header fixo (60px). Ajusta se o teu header tiver outra altura. */}
       <main className="content" style={{ paddingTop: "60px" }}>
         {/* topo */}
         <div className="content-top">
@@ -113,7 +112,7 @@ export default function GestaoUtilizadores() {
                   <tr key={u.email}>
                     <td>{u.nome}</td>
                     <td>
-                      <a className="email-link" href={`mailto:${u.email}`}>{u.email}</a>
+                      <a className="email-link" href={"mailto:" + u.email}>{u.email}</a>
                     </td>
                     <td><Badge tone={u.funcaoCor}>{u.funcao}</Badge></td>
                     <td><Estado value={u.estado} /></td>
