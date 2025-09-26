@@ -1,18 +1,66 @@
 :root { --header-h: 60px; }
+
+/* ===== Header ===== */
 .header {
   position: fixed; top:0; left:0; right:0; height: var(--header-h);
   background-color:#0a4c8a; color:#fff; display:flex; align-items:center; justify-content:space-between;
   padding:0 16px; box-sizing:border-box; box-shadow:0 2px 4px rgba(0,0,0,.2); z-index:1000;
 }
+
+.header-left{ display:flex; align-items:center; gap:10px; }
+
+/* Botão hamburger (3 traços) */
+.menu-btn{
+  width:40px; height:40px; display:inline-flex; flex-direction:column;
+  justify-content:center; align-items:center; gap:4px;
+  background:transparent; border:none; cursor:pointer; padding:0;
+}
+.menu-btn .bar{
+  width:22px; height:2px; background:#ffffff; display:block;
+  transition:transform .2s ease, opacity .2s ease, background .2s ease;
+}
+.menu-btn:hover .bar{ background:#dfeaff; }
+.menu-btn:focus-visible{ outline:2px solid #ffffff; outline-offset:2px; }
+
+/* Animação opcional para quando a sidebar estiver aberta: adicionar .is-open ao botão */
+.menu-btn.is-open .bar:nth-child(1){ transform: translateY(6px) rotate(45deg); }
+.menu-btn.is-open .bar:nth-child(2){ opacity:0; }
+.menu-btn.is-open .bar:nth-child(3){ transform: translateY(-6px) rotate(-45deg); }
+
 .brand { display:inline-flex; align-items:center; gap:10px; color:inherit; text-decoration:none; }
 .brand:hover, .brand:focus { text-decoration:none; }
-.header-left{ display:flex; align-items:center; }
+
 .logo{ height:32px; width:auto; background:#fff; border-radius:4px; padding:2px; object-fit:contain; }
 .title{ font-weight:800; font-size:18px; letter-spacing:.2px; }
+
 .header-right{ display:flex; align-items:center; gap:8px; padding-right:8px; }
 .avatar{ width:32px; height:32px; border-radius:50%; }
 .user-info{ display:flex; flex-direction:column; align-items:flex-end; font-size:12px; line-height:1.2; }
 .username{ font-weight:700; font-size:14px; }
 .welcome{ font-size:12px; opacity:.9; }
+
 .header-spacer{ height: var(--header-h); }
+
 @media (max-width:420px){ .title{ display:none; } }
+
+/* ===== Sidebar + Overlay (base) ===== */
+/* Estrutura básica para aparecer da esquerda ao clicar no hamburger */
+.sidebar{
+  position: fixed; top: var(--header-h); left:0; bottom:0; width:260px;
+  background:#0f2540; color:#fff; transform: translateX(-100%);
+  transition: transform .25s ease; z-index: 1001; /* acima do header */
+  box-shadow: 2px 0 10px rgba(0,0,0,.25);
+  padding:12px;
+}
+.sidebar.open{ transform: translateX(0); }
+
+.sidebar a{
+  display:block; color:#e5ecf6; text-decoration:none; padding:10px 8px; border-radius:6px;
+}
+.sidebar a:hover{ background: rgba(255,255,255,.08); }
+
+.overlay{
+  position: fixed; inset: 0; background: rgba(0,0,0,.35);
+  opacity:0; pointer-events:none; transition: opacity .25s ease; z-index:1000;
+}
+.overlay.show{ opacity:1; pointer-events:auto; }

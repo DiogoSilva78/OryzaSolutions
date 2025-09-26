@@ -33,7 +33,6 @@ html, body, #root {
 /* ocupa o ecrã todo e desvia do header fixo */
 .page-container{
   flex: 1;
-  padding: calc(var(--header-h) + 28px) 28px 40px;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -43,7 +42,7 @@ html, body, #root {
 /* faixa central com largura máxima */
 .page-inner{
   width: 100%;
-  max-width: var(--container-w);
+  max-width: 1600px;
   background: #fff;             /* fundo branco interno */
 }
 

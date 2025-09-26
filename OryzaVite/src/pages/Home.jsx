@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import logoUrl from '../assets/logo.png?url';           // garante URL direto
 import goldenpiscina from '../assets/goldenpiscina.png';
 import '../Home.css';
+import '../components/AppLayout.jsx';
 
 export default function Home() {
   const [email, setEmail] = useState('');
