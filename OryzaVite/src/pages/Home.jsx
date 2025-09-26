@@ -23,7 +23,7 @@ export default function Home() {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    if (validateForm()) navigate('/inventario');
+    if (validateForm()) navigate('/dashboard');
   };
 
   return (
