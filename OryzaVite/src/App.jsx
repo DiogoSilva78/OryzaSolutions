@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home.jsx";
 import GestaoUtilizadores from "./pages/GestaoUtilizadores.jsx";
-import Inventario from "./pages/Inventario.jsx";
+import Inventario from "./pages/inventario.jsx";
 import "./App.css";
 
 export default function App() {

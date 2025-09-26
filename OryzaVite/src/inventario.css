@@ -2,12 +2,11 @@
    Layout base + variáveis
    ========================= */
 :root{
-  --header-h: 64px;           /* ajusta se o teu Header for mais alto/baixo */
-  --container-w: 1180px;      /* largura máxima do conteúdo */
+  --header-h: 64px;
+  --container-w: 1180px;
   --radius: 14px;
   --shadow: 0 6px 22px rgba(0,0,0,.06);
   --b: #e5e7eb;
-  --bg: #f3f5f9;
   --txt: #1f2937;
   --muted: #6b7280;
   --primary: #2563eb;
@@ -18,11 +17,15 @@
 }
 
 *{ box-sizing: border-box; }
-body{ background:#fff; }              /* <- garante fundo branco no body */
+html, body, #root {
+  min-height: 100%;
+  margin: 0;
+  background:#fff !important;   /* fundo 100% branco */
+}
 
 .page-root{
   min-height: 100vh;
-  background: #fff;                   /* <- era um gradient; agora branco */
+  background: #fff;             /* fundo branco */
   display: flex;
   flex-direction: column;
 }
@@ -34,13 +37,14 @@ body{ background:#fff; }              /* <- garante fundo branco no body */
   width: 100%;
   display: flex;
   justify-content: center;
-  background:#fff;                    /* <- assegura branco na área de conteúdo */
+  background:#fff;              /* assegura branco na área de conteúdo */
 }
 
-/* faixa central com largura máxima e gutters laterais */
+/* faixa central com largura máxima */
 .page-inner{
   width: 100%;
   max-width: var(--container-w);
+  background: #fff;             /* fundo branco interno */
 }
 
 /* =========================
@@ -155,6 +159,7 @@ body{ background:#fff; }              /* <- garante fundo branco no body */
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   padding: 16px;
+  margin-bottom: 20px;
 }
 
 .cards{
@@ -185,11 +190,7 @@ body{ background:#fff; }              /* <- garante fundo branco no body */
   font-size: 18px;
   border: 1px solid #e8eaf1;
 }
-.card-label{
-  align-self: end;
-  color: var(--muted);
-  font-size: 14px;
-}
+.card-label{ align-self: end; color: var(--muted); font-size: 14px; }
 .card-value{
   align-self: start;
   font-size: 24px;
@@ -201,16 +202,6 @@ body{ background:#fff; }              /* <- garante fundo branco no body */
 .card-red{ color: var(--red); }
 .card-blue{ color: var(--blue); }
 
-/* =========================
-   Utilitário: faixa central
-   ========================= */
-.surface{
-  background: #fff;                 /* se usar, também sem cinza */
-  border: 1px solid var(--b);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: 22px;
-}
 /* =========================
    Resultados da procura
    ========================= */
@@ -248,7 +239,7 @@ body{ background:#fff; }              /* <- garante fundo branco no body */
   margin-left:10px;
   font-size: 12px;
   color:#6b7280;
-  background:#f3f5f9;
+  background:#fff;
   border:1px solid #e8eaf1;
   padding:2px 6px;
   border-radius: 999px;
@@ -260,13 +251,13 @@ body{ background:#fff; }              /* <- garante fundo branco no body */
   padding: 3px 8px;
   border-radius: 999px;
   border:1px solid #e8eaf1;
-  background:#f6f7fb;
+  background:#fff;
   color:#0f172a;
 }
 .chip-green{ background:#e9f9ef; border-color:#bef3d0; color:#0f6b2b; }
 .chip-red{ background:#fdecec; border-color:#fac7cb; color:#b42318; }
 .chip-purple{ background:#efe9ff; border-color:#dac6ff; color:#5b21b6; }
-.chip-gray{ }
+.chip-gray{ background:#f6f7fb; color:#555; }
 
 .result-body{ margin-top: 6px; }
 .loc-label{ font-size:12px; color:#6b7280; margin: 0 0 6px 4px; }
@@ -281,7 +272,7 @@ body{ background:#fff; }              /* <- garante fundo branco no body */
 }
 
 .loc-pill{
-  background:#efe7db;          /* bege leve */
+  background:#fff;                /* fundo branco */
   border:1px solid #e2d4bf;
   border-radius: 12px;
   height: 48px;
@@ -301,5 +292,31 @@ body{ background:#fff; }              /* <- garante fundo branco no body */
 .loc-green{
   background:#e6faf0; border-color:#bfead5;
 }
-.loc-green .loc-title{ color:#0f6b2b;
+.loc-green .loc-title{ color:#0f6b2b; }
+
+/* Pílulas coloridas por tipo de localização */
+.loc-estante{
+  background:#FFF7ED;           /* laranja pastel */
+  border-color:#FBD6A8;
 }
+.loc-estante .loc-title{ color:#9A3412; }   /* castanho/âmbar */
+
+.loc-prateleira{
+  background:#EFF6FF;           /* azul claro */
+  border-color:#BFDBFE;
+}
+.loc-prateleira .loc-title{ color:#1D4ED8; } /* azul médio */
+
+.loc-armario{
+  background:#F3F4F6;           /* cinza suave */
+  border-color:#E5E7EB;
+}
+.loc-armario .loc-title{ color:#374151; }    /* cinza escuro */
+
+.loc-armazem,
+.loc-green{
+  background:#E6FAF0;           /* verde claro (já tinhas) */
+  border-color:#BFEAD5;
+}
+.loc-armazem .loc-title,
+.loc-green .loc-title{ color:#0F6B2B; }

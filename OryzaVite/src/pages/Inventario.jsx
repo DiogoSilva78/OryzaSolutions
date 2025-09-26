@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import Header from "../components/header.jsx"; // mantém o teu caminho
+import Header from "../components/header.jsx";
 import "../inventario.css";
 
 // --- Dados MOCK ---
@@ -13,19 +13,18 @@ export default function LocalizacaoStock() {
   const [termo, setTermo] = useState("");
   const [pesquisou, setPesquisou] = useState(false);
 
-  // Filtra por nome contendo o termo (case-insensitive)
+  // Resultados só são relevantes DEPOIS de pesquisar
   const resultados = useMemo(() => {
     const t = termo.trim().toLowerCase();
     if (!t) return [];
     return MOCK_PACKS.filter((p) => p.nome.toLowerCase().includes(t));
   }, [termo]);
 
-  // KPIs (exemplo simples com base nos mocks)
   const kpis = useMemo(() => {
     const total = MOCK_PACKS.reduce((acc, p) => acc + p.quantidade, 0);
-    const emUso = 23; // mock
+    const emUso = 23;
     const stockBaixo = MOCK_PACKS.filter((p) => p.quantidade < 10).length;
-    const scansHoje = 47; // mock
+    const scansHoje = 47;
     return { total, emUso, stockBaixo, scansHoje };
   }, []);
 
@@ -55,6 +54,35 @@ export default function LocalizacaoStock() {
             <button className="btn"><span className="btn-icon">📦</span> Materiais descartáveis</button>
           </div>
 
+          {/* KPIs — só depois de pesquisar */}
+          
+            <section className="stats-wrap">
+              <div className="cards">
+                <article className="card">
+                  <div className="card-icon">📦</div>
+                  <div className="card-label">Stock Disponível</div>
+                  <div className="card-value card-green">{kpis.total.toLocaleString("pt-PT")}</div>
+                </article>
+                <article className="card">
+                  <div className="card-icon">〰️</div>
+                  <div className="card-label">Em Uso</div>
+                  <div className="card-value card-yellow">{kpis.emUso}</div>
+                </article>
+                <article className="card">
+                  <div className="card-icon">⚠️</div>
+                  <div className="card-label">Stock Baixo</div>
+                  <div className="card-value card-red">{kpis.stockBaixo}</div>
+                </article>
+                <article className="card">
+                  <div className="card-icon">🔳</div>
+                  <div className="card-label">QR Scans Hoje</div>
+                  <div className="card-value card-blue">{kpis.scansHoje}</div>
+                </article>
+              </div>
+            </section>
+
+
+
           {/* Pesquisa */}
           <section className="search-box">
             <h2 className="search-title"><span>🔎</span> Localização Instantânea de Stock</h2>
@@ -72,13 +100,15 @@ export default function LocalizacaoStock() {
               </button>
             </form>
 
-            {/* Dica inicial (antes da pesquisa) */}
             {!pesquisou && (
-              <p style={{marginTop:8, color:"#6b7280", fontSize:13}}>
+              <p style={{ marginTop: 8, color: "#6b7280", fontSize: 13 }}>
                 Escreve um termo e clica em <strong>Procurar</strong> para ver resultados.
               </p>
             )}
           </section>
+
+          
+          
 
           {/* Resultados — só depois de pesquisar */}
           {pesquisou && (
@@ -87,13 +117,8 @@ export default function LocalizacaoStock() {
                 Resultados da procura: {resultados.length} item(s)
               </h3>
 
-              {resultados.length === 0 && (
-                <div className="empty">
-                  <span>😕</span>
-                  <p>Nenhum resultado para “{termo}”.</p>
-                  <button className="btn" onClick={limpar}>Limpar</button>
-                </div>
-              )}
+              
+              
 
               {resultados.map((p) => (
                 <article key={p.id} className="result-card">
@@ -127,63 +152,31 @@ export default function LocalizacaoStock() {
                   <div className="result-body">
                     <p className="loc-label">Localização:</p>
                     <div className="loc-grid">
-                      <div className="loc-pill">
-                        <span className="loc-title">Estante</span>
-                        <span className="loc-value">{p.localizacao.estante}</span>
-                      </div>
-                      <div className="loc-pill">
-                        <span className="loc-title">Prateleira</span>
-                        <span className="loc-value">{p.localizacao.prateleira}</span>
-                      </div>
-                      <div className="loc-pill">
-                        <span className="loc-title">Armário</span>
-                        <span className="loc-value">{p.localizacao.armario}</span>
-                      </div>
-                      <div className="loc-pill loc-green">
-                        <span className="loc-title">Armazém</span>
-                        <span className="loc-value">{p.localizacao.armazem}</span>
-                      </div>
+                    <div className="loc-pill loc-estante">
+                      <span className="loc-title">Estante</span>
+                      <span className="loc-value">{p.localizacao.estante}</span>
                     </div>
+                    <div className="loc-pill loc-prateleira">
+                      <span className="loc-title">Prateleira</span>
+                      <span className="loc-value">{p.localizacao.prateleira}</span>
+                    </div>
+                    <div className="loc-pill loc-armario">
+                      <span className="loc-title">Armário</span>
+                      <span className="loc-value">{p.localizacao.armario}</span>
+                    </div>
+                    <div className="loc-pill loc-armazem">
+                      <span className="loc-title">Armazém</span>
+                      <span className="loc-value">{p.localizacao.armazem}</span>
+                    </div>
+                  </div>
+
                   </div>
                 </article>
               ))}
             </section>
           )}
-
-          {/* KPIs — só depois de pesquisar */}
-          {pesquisou && (
-            <section className="stats-wrap">
-              <div className="cards">
-                <article className="card">
-                  <div className="card-icon">📦</div>
-                  <div className="card-label">Stock Disponível</div>
-                  <div className="card-value card-green">
-                    {kpis.total.toLocaleString("pt-PT")}
-                  </div>
-                </article>
-
-                <article className="card">
-                  <div className="card-icon">〰</div>
-                  <div className="card-label">Em Uso</div>
-                  <div className="card-value card-yellow">{kpis.emUso}</div>
-                </article>
-
-                <article className="card">
-                  <div className="card-icon">⚠</div>
-                  <div className="card-label">Stock Baixo</div>
-                  <div className="card-value card-red">{kpis.stockBaixo}</div>
-                </article>
-
-                <article className="card">
-                  <div className="card-icon">🔳</div>
-                  <div className="card-label">QR Scans Hoje</div>
-                  <div className="card-value card-blue">{kpis.scansHoje}</div>
-                </article>
-              </div>
-            </section>
-          )}
         </div>
       </main>
-    </div>
-  );
+    </div>
+  );
 }

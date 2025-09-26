@@ -15,9 +15,12 @@
 }
 
 .logo {
-  margin: 20px 0 0 -30px;
-  max-width: 500px;
+  margin: 20px auto;
+  width: 400px;   /* aumenta para o tamanho desejado */
+  height: auto;
+  display: block;
 }
+
 
 .golden {
   padding: 0;

@@ -1,11 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import reactLogo from '../assets/react.svg';
 import logo from '../assets/logo.png';
 import goldenpiscina from '../assets/goldenpiscina.png';
-import '../App.css';
 import '../Home.css';
-import '../components/header.jsx';
+
 
 function App() {
   const [email, setEmail] = useState('');
